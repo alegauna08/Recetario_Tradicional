@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recetario tradicional</title>
+    <style>
+        .recetario {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            padding: 10px;
+        }
+        .receta {
+            padding: 10px;
+            border: 1px solid #000;
+            border-radius: 8px;
+        }
+        .imagen-receta {
+            display: flex;
+            width: 100%;
+            height: 400px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            background: #f0f0f0;
+            color: #666;
+            object-fit: cover;
+        }
+        .verInfo {
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 4px;
+            background: #007bff;
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Recetario tradicional argentino</h1>
+        <p>Recetas típicas de la cultura argentina.</p>
+    </header>
+    <main class="recetario"></main>
+    <script src="recetas.js"></script>
+    <script>
+        const recetario = document.querySelector('.recetario');
+
+        recetas.forEach(receta => {
+            const tarjeta = document.createElement('article');
+            tarjeta.className = 'receta';
+            const imagen = receta.imagen
+                ? `<img class="imagen-receta" src="${receta.imagen}" alt="${receta.nombre}">`
+                : '<div class="imagen-receta">Imagen pendiente</div>';
+            tarjeta.innerHTML = `
+                ${imagen}
+                <h2>${receta.nombre}</h2>
+                <p><strong>${receta.resumen}</strong></p>
+                <a class="verInfo" href="receta.html?id=${receta.id}">Ver información</a>
+            `;
+            recetario.append(tarjeta);
+        });
+    </script>
+</body>
+</html>
